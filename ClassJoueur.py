@@ -100,8 +100,3 @@ class Joueur:
                         break
         sleep(1000)
         return self.connecte
-
-y = Joueur()
-print(y.Choix_du_nom())
-print(y.Choix_symbole())
-print(y.connexion())
