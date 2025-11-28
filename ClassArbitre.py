@@ -17,11 +17,9 @@ class Arbitre:
         while not button_a.is_pressed() :
             nom_joueur = radio.receive()
             sleep(50)
-            if not nom_joueur:
-                continue  # "continue" sert à passer un tour dans la boucle
             if nom_joueur not in self.dictio_joueurs :
                 self.dictio_joueurs[nom_joueur] = Pile()
-                self.joueurs_c += 1
+                self.joueurs_c = len(list(self.dictio_joueurs.keys()))
                 display.show(str(self.joueurs_c))
                 radio.send(str("ok"))
                 sleep(200)
@@ -34,7 +32,7 @@ class Arbitre:
         seuil_validation = 2000
         terminer = False
         for index in possibilite :
-            f.enfiler(index)
+            f.enfiler(int(index))
 
         manche = f.defiler()
         f.enfiler(manche)
@@ -78,7 +76,7 @@ class Arbitre:
         radio.send("à vos choix")
         sleep(1000)
         compteur = 0  # compte le nombre de symbole reçu
-        while compteur < self.joueurs_c:
+        while compteur < self.joueurs_c-1 :
             symbole = radio.receive()
             sleep(50)
             if not symbole:
@@ -152,4 +150,6 @@ class Arbitre:
             sleep(500)
         return
 
+y = Arbitre()
+print(y.lancer_partie())
         
